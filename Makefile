@@ -1,7 +1,7 @@
 BUILD_DIR = build
 
 SRC_DIR    = src
-SRC_TARGET = $(BUILD_DIR)/chat_client
+SRC_TARGET = $(BUILD_DIR)/chat-client
 SRC_FILES  = $(shell find $(SRC_DIR)  -name '*.cpp')
 SRC_OBJS   = $(SRC_FILES:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/$(SRC_DIR)/%.o)
 
@@ -17,12 +17,12 @@ DBGFLAGS = -g -O0
 LDLIBS = -lpthread
 GTEST_LIBS = -lgtest -lgtest_main -pthread
 
-.PHONY: all build debug clean build_tests
+.PHONY: all run build debug run_tests build_tests debug_tests clean
 
 all: build build_tests
 
-info:
-	@echo $(SRC_FILES)
+run: build
+	$(SRC_TARGET)
 
 build: $(SRC_OBJS)
 	@mkdir -p $(BUILD_DIR)
@@ -30,6 +30,9 @@ build: $(SRC_OBJS)
 
 debug:
 	$(MAKE) build CXXFLAGS="$(CXXFLAGS) $(DBGFLAGS)"
+
+run_tests: build_tests
+	$(TEST_TARGET)
 
 build_tests: $(SRC_OBJS) $(TEST_OBJS)
 	@mkdir -p $(BUILD_DIR)
