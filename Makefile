@@ -17,9 +17,9 @@ DBGFLAGS = -g -O0
 LDLIBS = -lpthread
 GTEST_LIBS = -lgtest -lgtest_main -pthread
 
-.PHONY: all build debug clean build_test
+.PHONY: all build debug clean build_tests
 
-all: build build_test
+all: build build_tests
 
 info:
 	@echo $(SRC_FILES)
@@ -31,9 +31,12 @@ build: $(SRC_OBJS)
 debug:
 	$(MAKE) build CXXFLAGS="$(CXXFLAGS) $(DBGFLAGS)"
 
-build_test: $(SRC_OBJS) $(TEST_OBJS)
+build_tests: $(SRC_OBJS) $(TEST_OBJS)
 	@mkdir -p $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) $^ -o $(TEST_TARGET) $(LDLIBS) $(GTEST_LIBS)
+
+debug_tests:
+	$(MAKE) build_tests CXXFLAGS="$(CXXFLAGS) $(DBGFLAGS)"
 
 $(BUILD_DIR)/$(SRC_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(BUILD_DIR)/$(SRC_DIR)
