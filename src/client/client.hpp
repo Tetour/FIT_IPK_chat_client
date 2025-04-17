@@ -3,6 +3,7 @@
 #include <string>
 #include <cstdint>
 
+
 class Client {
 public:
     Client(std::string serverAddress, uint16_t serverPort, uint16_t timeout, uint16_t maxRetries);
