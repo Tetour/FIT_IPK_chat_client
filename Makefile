@@ -1,3 +1,4 @@
+# Build directory path
 BUILD_DIR = build
 
 # Source files settings
@@ -25,6 +26,9 @@ GTEST_LIBS = -lgtest -lgtest_main -pthread
 DEPS = $(SRC_OBJS:.o=.d) $(TEST_OBJS:.o=.d)
 CXXFLAGS += -MMD -MP
 
+# Directory creation variable
+MKDIR = @mkdir -p $(dir $@)
+
 .PHONY: all run build debug run_tests build_tests debug_tests clean
 
 all: build build_tests
@@ -51,12 +55,12 @@ debug_tests:
 
 # Compile and link source files
 $(BUILD_DIR)/$(SRC_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@mkdir -p $(BUILD_DIR)/$(SRC_DIR)
+	$(MKDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Compile and link test files
 $(BUILD_DIR)/$(TEST_DIR)/%.o: $(TEST_DIR)/%.cpp
-	@mkdir -p $(BUILD_DIR)/$(TEST_DIR)
+	$(MKDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
