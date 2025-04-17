@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -43,11 +42,4 @@ private:
     bool CheckServerAddress(char* address);
     bool CheckNum(char* value);
     bool CheckPortValidity(char* port); 
-
-
-    // This block declares ParserTest as a friend class, allowing it to access private members of Parser.
-    // It is only included during testing to facilitate unit testing of private methods.
-    #ifdef TESTING
-        friend class ParserTest; 
-    #endif
 };
