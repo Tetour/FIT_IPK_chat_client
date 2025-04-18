@@ -26,7 +26,7 @@ public:
     std::string GetServerAddress() const;
     uint16_t GetServerPort() const;
     uint16_t GetTimeout() const;
-    uint16_t GetMaxRetries() const;
+    uint8_t GetMaxRetries() const;
 
     bool IsHelp() const;
 
@@ -35,7 +35,7 @@ private:
     std::string serverAddress;
     uint16_t serverPort = 4567;
     uint16_t timeout = 250;     // timeout in milliseconds
-    uint16_t maxRetries = 3;
+    uint8_t maxRetries = 3;
 
     bool helpFlag = false;
 

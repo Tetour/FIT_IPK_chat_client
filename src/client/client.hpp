@@ -3,10 +3,9 @@
 #include <string>
 #include <cstdint>
 
-
 class Client {
 public:
-    Client(std::string serverAddress, uint16_t serverPort, uint16_t timeout, uint16_t maxRetries);
+    Client(std::string serverAddress, uint16_t serverPort);
     virtual ~Client();
 
     virtual bool connect() = 0;
@@ -18,6 +17,4 @@ public:
 protected:
     std::string serverAddress;
     uint16_t serverPort;
-    uint16_t timeout;
-    uint16_t maxRetries;
 };

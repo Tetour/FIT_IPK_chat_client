@@ -16,27 +16,20 @@ int main(int argc, char ** argv) {
         return 0;
     }
 
-    try {
-        if (parser.GetProtocol() == "tcp") {
-            ClientTCP client(
-                parser.GetServerAddress(),
-                parser.GetServerPort(),
-                parser.GetTimeout(),
-                parser.GetMaxRetries()
-            );
-            client.run();
-        } else {
-            ClientUDP client(
-                parser.GetServerAddress(),
-                parser.GetServerPort(),
-                parser.GetTimeout(),
-                parser.GetMaxRetries()
-            );
-            client.run();
-        }
-    } catch (const std::exception& error) {
-        cerr << "Error: " << error.what() << endl;
-        return 1;
+    if (parser.GetProtocol() == "tcp") {
+        ClientTCP client(
+            parser.GetServerAddress(),
+            parser.GetServerPort()
+        );
+        client.run();
+    } else if (parser.GetProtocol() == "udp") {
+        ClientUDP client(
+            parser.GetServerAddress(),
+            parser.GetServerPort(),
+            parser.GetTimeout(),
+            parser.GetMaxRetries()
+        );
+        client.run();
     }
     return 0;
 }

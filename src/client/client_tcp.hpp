@@ -14,14 +14,20 @@
 
 class ClientTCP : public Client {
 public:
-    ClientTCP(std::string serverAddress, uint16_t serverPort, uint16_t timeout, uint16_t maxRetries);
-    ~ClientTCP();
+    ClientTCP(std::string serverAddress, uint16_t serverPort);
+   ~ClientTCP();
 
     bool connect() override;
     bool disconnect() override;
-    bool sendMessage(const std::string& message) override;
-    bool receiveMessage(std::string& message) override;
     void run() override;
+
+    bool receiveMessage(std::string& message) override;
+    bool sendMessage(const std::string& message) override;
+
+    bool sendMessageAuth();
+    bool sendMessageJoin();
+    bool sendMessageBye();
+    bool sendMessageErr();
 
 private:
     int sockfd = -1;

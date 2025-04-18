@@ -2,15 +2,15 @@
 #include <iostream>
 
 
-ClientUDP::ClientUDP(std::string serverAddress, uint16_t serverPort, uint16_t timeout, uint16_t maxRetries) 
-    : Client(serverAddress, serverPort, timeout, maxRetries) {
+ClientUDP::ClientUDP(std::string serverAddress, uint16_t serverPort, uint16_t timeout, uint8_t maxRetries) 
+    : Client(serverAddress, serverPort), timeout(timeout), maxRetries(maxRetries) {
 }
 
 ClientUDP::~ClientUDP() {
     disconnect();
 }
 
-bool ClientUDP::connect() {
+bool ClientUDP::connect(){
     // UDP connection implementation
     return true;
 }
@@ -32,18 +32,21 @@ bool ClientUDP::receiveMessage(std::string& message) {
 
 void ClientUDP::run() {
     if (!connect()) {
-        throw std::runtime_error("Failed to connect to server");
+        std::cerr << "ERROR: Failed to connect to server" << std::endl;
+        return;
     }
 
     std::string message;
     while (std::getline(std::cin, message)) {
         if (!sendMessage(message)) {
-            throw std::runtime_error("Failed to send message");
+            std::cerr << "ERROR: Failed to send message" << std::endl;
+            break;
         }
 
         std::string response;
         if (!receiveMessage(response)) {
-            throw std::runtime_error("Failed to receive response");
+            std::cerr << "ERROR: Failed to receive response" << std::endl;
+            break;
         }
     }
 

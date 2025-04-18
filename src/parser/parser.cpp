@@ -62,7 +62,7 @@ bool Parser::AreArgsValid(int argc, char ** argv){
             if (!(i+1 < argc && CheckNum(argv[i+1]))){
                 return false;
             }
-            maxRetries = static_cast<uint16_t>(strtol(argv[i+1], nullptr, 10));
+            maxRetries = static_cast<uint8_t>(strtol(argv[i+1], nullptr, 10));
             i++;
         }
     }
@@ -89,7 +89,7 @@ uint16_t Parser::GetTimeout() const {
     return timeout;
 }
 
-uint16_t Parser::GetMaxRetries() const {
+uint8_t Parser::GetMaxRetries() const {
     return maxRetries;
 }
 
