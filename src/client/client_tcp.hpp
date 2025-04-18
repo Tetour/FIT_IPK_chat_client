@@ -21,13 +21,14 @@ public:
     bool disconnect() override;
     void run() override;
 
-    bool receiveMessage(std::string& message) override;
+    bool recvMessage(std::string& message) override;
     bool sendMessage(const std::string& message) override;
 
-    bool sendMessageAuth();
-    bool sendMessageJoin();
-    bool sendMessageBye();
-    bool sendMessageErr();
+    std::string createMessageMsg  (std::string messageContent ) const;
+    std::string createMessageErr  (std::string messageContent ) const;
+    std::string createMessageJoin (std::string channelID      ) const;
+    std::string createMessageAuth () const;
+    std::string createMessageBye  () const;
 
 private:
     int sockfd = -1;

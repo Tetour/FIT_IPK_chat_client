@@ -14,7 +14,13 @@ public:
     bool disconnect() override;
     void run() override;
     bool sendMessage(const std::string& message) override;
-    bool receiveMessage(std::string& message) override;
+    bool recvMessage(std::string& message) override;
+
+    std::string createMessageMsg  (std::string messageContent) const override;
+    std::string createMessageErr  (std::string messageContent) const override;
+    std::string createMessageJoin (std::string channelID     ) const override;
+    std::string createMessageAuth () const override;
+    std::string createMessageBye  () const override;
 
 private:
     uint16_t timeout;

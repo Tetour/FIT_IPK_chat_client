@@ -10,7 +10,7 @@ ClientUDP::~ClientUDP() {
     disconnect();
 }
 
-bool ClientUDP::connect(){
+bool ClientUDP::connect() {
     // UDP connection implementation
     return true;
 }
@@ -25,30 +25,37 @@ bool ClientUDP::sendMessage(const std::string& message) {
     return true;
 }
 
-bool ClientUDP::receiveMessage(std::string& message) {
+bool ClientUDP::recvMessage(std::string& message) {
     // UDP message receiving implementation
     return true;
 }
 
 void ClientUDP::run() {
-    if (!connect()) {
-        std::cerr << "ERROR: Failed to connect to server" << std::endl;
-        return;
-    }
+    // UDP client run implementation
+    return;
+}
 
-    std::string message;
-    while (std::getline(std::cin, message)) {
-        if (!sendMessage(message)) {
-            std::cerr << "ERROR: Failed to send message" << std::endl;
-            break;
-        }
+std::string ClientUDP::createMessageMsg(std::string messageContent) const {
+    // TODO: Implement UDP protocol message format
+    return "";
+}
 
-        std::string response;
-        if (!receiveMessage(response)) {
-            std::cerr << "ERROR: Failed to receive response" << std::endl;
-            break;
-        }
-    }
+std::string ClientUDP::createMessageErr(std::string messageContent) const {
+    // TODO: Implement UDP protocol message format
+    return "";
+}
 
-    disconnect();
+std::string ClientUDP::createMessageJoin(std::string channelID) const {
+    // TODO: Implement UDP protocol message format
+    return "";
+}
+
+std::string ClientUDP::createMessageAuth() const {
+    // TODO: Implement UDP protocol message format
+    return "";
+}
+
+std::string ClientUDP::createMessageBye() const {
+    // TODO: Implement UDP protocol message format
+    return "";
 }
