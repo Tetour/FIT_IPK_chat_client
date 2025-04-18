@@ -29,7 +29,7 @@ CXXFLAGS += -MMD -MP
 # Directory creation variable
 MKDIR = @mkdir -p $(dir $@)
 
-.PHONY: all run build debug run_tests build_tests debug_tests clean
+.PHONY: all run build debug run_tests build_tests debug_tests pack clean
 
 all: build build_tests
 
@@ -62,6 +62,8 @@ $(BUILD_DIR)/$(SRC_DIR)/%.o: $(SRC_DIR)/%.cpp
 $(BUILD_DIR)/$(TEST_DIR)/%.o: $(TEST_DIR)/%.cpp
 	$(MKDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+pack:
 
 clean:
 	rm -rf $(BUILD_DIR)
